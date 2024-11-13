@@ -1,0 +1,54 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main{
+    public static void main(String[]args)
+    {
+        JFrame frame = new JFrame("My app");
+        JLabel label = new JLabel("0");
+        JLabel empty1 = new JLabel();
+        JLabel empty2 = new JLabel();
+        JButton click = new JButton("click me");
+        JButton reset = new JButton("reset");
+        JButton decrement = new JButton("decrement");
+
+        frame.setLayout(new GridLayout(2,3));
+        frame.setSize(500, 500);
+        frame.add(label);
+        frame.add(empty1);
+        frame.add(empty2);
+        frame.add(click);
+        frame.add(decrement);
+        frame.add(reset);
+
+        frame.setVisible(true);
+
+        click.addActionListener(new ActionListener (){
+            public void actionPerformed(ActionEvent e){
+                int counter = Integer.parseInt(label.getText());
+                counter++;
+                label.setText(String.valueOf(counter));
+            }
+        });
+
+        reset.addActionListener(new ActionListener (){
+            public void actionPerformed(ActionEvent e){
+                int make0 = Integer.parseInt(label.getText());
+                make0 = 0;
+                label.setText(String.valueOf(make0));
+            }
+        });
+
+        decrement.addActionListener(new ActionListener (){
+            public void actionPerformed(ActionEvent e){
+                int below0 = Integer.parseInt(label.getText()); // read the value and convert to int
+                if (below0!=0) {
+                    below0--; // decreemnet
+                    label.setText(String.valueOf(below0)); // print the new value
+                }
+            }
+        });
+    }
+}
