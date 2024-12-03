@@ -1,0 +1,114 @@
+public class WizzardsANDWarriors {
+
+    public static void main(String[] args){
+        Wizard wiz = new Wizard("Merlin",100, 10,5);
+        Warrior warr = new Warrior("Ragnar",100,7,10);
+        Horseman hs = new Horseman("john", 100, 15, 6);
+
+        System.out.println(wiz.getName() + "'s health: " + wiz.getHealth());
+        System.out.println(warr.getName()+"'s health: " + warr.getHealth());
+        System.out.println(hs.getName()"' health: "+ hs.getHealth());
+        System.out.println("...Game is starting...");
+        wiz.setHealth(warr);
+        System.out.println( warr.getName()+" attacks " + wiz.getName() + ". Health updated: " + wiz.getHealth());
+
+        // Task 6: make the wizard attack your new character.
+        // Task 7: display the new stats
+
+
+        // CHALLENGE: Update your program for all the characters to be able to attack each other.
+    }
+}
+
+
+class Wizard {
+    private String name;
+    private int health;
+    private int darkMagic;
+    private int wizardArmor;
+
+    public Wizard(String name, int health, int darkMagic, int wizardArmor){
+        this.name = name;
+        this.health = health;
+        this.darkMagic = darkMagic;
+        this.wizardArmor = wizardArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDarkMagic(){
+        return darkMagic;
+    }
+
+    public void setHealth(Warrior attack) {
+       health = health - (attack.getSword() - wizardArmor);
+    }
+
+    public int getHealth() { //!!!setter updates getter returns!!!
+        return health;
+    }
+
+}
+
+class Warrior {
+    private String name;
+    private int health;
+    private int sword;
+    private int metalArmor;
+
+    public Warrior(String name, int health, int sword, int metalArmor){
+        this.name = name;
+        this.health = health;
+        this.sword = sword;
+        this.metalArmor = metalArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSword() {
+        return sword;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(Wizard attack) {
+       health = health - (attack.getDarkMagic() - metalArmor);
+    }
+
+}
+class Horseman{
+    private String name;
+    private int health;
+    private int speed;
+    private int horsemanArmor;
+
+    public Horseman(String name, int health, int speed, int horsemanArmor){
+        this.name=name;
+        this.health=health;
+        this.speed=speed;
+        this.horsemanArmor=horsemanArmor;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+    public int getSpeed(){
+        return speed;
+    }
+    public void setHealth(Wizard wizz){
+        health = health - (wizz.getDarkMagic() - horsemanArmor);
+    }
+    public void setHealth(Warrior warr){
+        health = health - (warr.getSword() - horsemanArmor);
+    }
+}
