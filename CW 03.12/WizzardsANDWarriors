@@ -1,22 +1,34 @@
-public class WizzardsANDWarriors {
+public class WizzardsANDWarriors{
 
     public static void main(String[] args){
         Wizard wiz = new Wizard("Merlin",100, 10,5);
         Warrior warr = new Warrior("Ragnar",100,7,10);
-        Horseman hs = new Horseman("john", 100, 15, 6);
+        Horseman hs = new Horseman("John", 100, 15, 6);
 
         System.out.println(wiz.getName() + "'s health: " + wiz.getHealth());
         System.out.println(warr.getName()+"'s health: " + warr.getHealth());
-        System.out.println(hs.getName()"' health: "+ hs.getHealth());
+        System.out.println(hs.getName()+"' health: "+ hs.getHealth());
         System.out.println("...Game is starting...");
+        System.out.println(" ");
+
         wiz.setHealth(warr);
-        System.out.println( warr.getName()+" attacks " + wiz.getName() + ". Health updated: " + wiz.getHealth());
+        System.out.println(warr.getName()+" attacks " + wiz.getName() + ". Health updated: " + wiz.getHealth());
 
-        // Task 6: make the wizard attack your new character.
-        // Task 7: display the new stats
+        wiz.setHealth(hs);
+        System.out.println(hs.getName()+" attacks " + wiz.getName() + ". Health updated: " + wiz.getHealth());
 
+        warr.setHealth(wiz);
+        System.out.println(wiz.getName()+" attacks "+ warr.getName()+". Health updated: "+hs.getHealth());
 
-        // CHALLENGE: Update your program for all the characters to be able to attack each other.
+        warr.setHealth(hs);
+        System.out.println(hs.getName()+" attacks "+ warr.getName()+". Health updated: "+hs.getHealth());
+
+        hs.setHealth(wiz);
+        System.out.println(wiz.getName()+" attacks "+ hs.getName()+". Health updated: "+hs.getHealth());
+
+        hs.setHealth(warr);
+        System.out.println(warr.getName()+" attacks "+ hs.getName()+". Health updated: "+hs.getHealth());
+
     }
 }
 
@@ -42,12 +54,14 @@ class Wizard {
         return darkMagic;
     }
 
-    public void setHealth(Warrior attack) {
-       health = health - (attack.getSword() - wizardArmor);
-    }
-
     public int getHealth() { //!!!setter updates getter returns!!!
         return health;
+    }
+     public void setHealth(Warrior warr) {
+       health = health - (warr.getSword() - wizardArmor);
+    }
+     public void setHealth(Horseman hs) {
+       health = health - (hs.getSpeed() - wizardArmor);
     }
 
 }
@@ -80,6 +94,9 @@ class Warrior {
     public void setHealth(Wizard attack) {
        health = health - (attack.getDarkMagic() - metalArmor);
     }
+    public void setHealth(Horseman hs) {
+       health = health - (hs.getSpeed() - metalArmor);
+    }
 
 }
 class Horseman{
@@ -105,8 +122,8 @@ class Horseman{
     public int getSpeed(){
         return speed;
     }
-    public void setHealth(Wizard wizz){
-        health = health - (wizz.getDarkMagic() - horsemanArmor);
+    public void setHealth(Wizard wiz){
+        health = health - (wiz.getDarkMagic() - horsemanArmor);
     }
     public void setHealth(Warrior warr){
         health = health - (warr.getSword() - horsemanArmor);
