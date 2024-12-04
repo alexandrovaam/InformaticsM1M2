@@ -1,0 +1,82 @@
+public class ProjectZooSimulation{
+    public static void main(String[] args){
+        Habitat h1 = new Habitat("forest", 675, 18);
+        Habitat h2 = new Habitat("desert", 95, 27);
+        Habitat h3 = new Habitat("mountains", 673, 9);
+
+        Staff s1 = new Staff("kamen", "zookeeper");
+        Staff s2 = new Staff("mimi", "tickets");
+        Staff s3 = new Staff("bogdan", "bus");
+
+        s1.assignStaff(h1);
+        s2.assignStaff(h2);
+        s3.assignStaff(h3);
+
+    }
+}
+class Animal{
+    private String name;
+    private String species;
+    private int age;
+    private Habitat habitat;
+
+    public Animal(String name, String species, int age, Habitat habitat){
+        this.name=name;
+        this.species=species;
+        this.age=age;
+        this.habitat=habitat;
+    }
+    /*public void eat(String food, Staff staff){
+        System.out.println(this.name + " is fed " + food + " by "+staff.getName());
+    }*/
+}
+class Habitat{
+    private String type;
+    private double size;
+    private double temperature;
+
+    public Habitat(String type, double size, double temperature){
+        this.type=type;
+        this.size=size;
+        this.temperature=temperature;
+    }
+
+}
+class Zoo{
+    private Animal a1;
+    private Animal a2;
+    private Animal a3;
+    private Animal a4;
+
+    void AddAnimal1(){
+        a1 = new Animal("cotton", "cat", 10);
+    }
+    void AddAnimal2(){
+        a2 = new Animal("pesho", "cow", 5);
+    }
+    void AddAnimal3(){
+        a3 = new Animal("misho", "bear", 4);
+    }
+    void AddAnimal4(){
+        a4 = new Animal("kiro", "pig", 25);
+    }
+
+}
+class Staff{
+    private String name;
+    private String role;
+    private Habitat assignedHabitat;
+
+    public Staff(String name, String role, Habitat assignedHabitat){
+        this.name=name;
+        this.role=role;
+        this.assignedHabitat=assignedHabitat;
+    }
+    public String getName(){
+        return name;
+    }
+    public void assignStaff(Habitat habitat){
+        assignedHabitat = habitat;
+    }
+
+}
