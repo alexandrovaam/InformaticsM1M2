@@ -1,93 +1,93 @@
+import java.lang.module.FindException;
 import java.util.Scanner;
 
-public class gradebook {
+public class Main {
     public static void main(String[] args) {
         String[] students = {"Nikoleta", "Vasil", "Martin","Svetoslav","Irina", "Aleksandar"};
         int[] grade = {99, 49, 89, 45, 35, 78 };
 
         System.out.println("Choose from the following menu:");
         System.out.println("1. Calculate Average");
-		System.out.println("2. Display the student with the highest grade");
-		System.out.println("3. Display the student with the lowest grade");
-		System.out.println("4. Display the count of students who are failing (>50 is failing)");
-		System.out.println("5. Look up student grade with user input. ");	
-		System.out.println("6.Exit");
+        System.out.println("2. Display the student with the highest grade");
+        System.out.println("3. Display the student with the lowest grade");
+        System.out.println("4. Display the count of students who are failing (>50 is failing)");
+        System.out.println("5. Look up student grade with user input. ");
+        System.out.println("6.Exit");
 
-        Scanner scan = new scanner(System.in);
-        int menu = Scan.nextInt;
-        switch (menu):
+        Scanner scan = new Scanner(System.in);
+        int menu = scan.nextInt();
+        switch (menu){
         case 1:
-			System.out.println("1. Calculate Average"+calculateAverage(grade));
-			break;
-		case 2: 
-			System.out.println("2. Display the student with the highest grade"+findHighestGradeStudent(studentNames, grade));
-			break;
-		case 3:
-			System.out.println("3. Display the student with the lowest grade"+findLowestGradeStudent(studentNames, grade));
-			break;
-		case 4:
-			System.out.println("4. Display the count of students who are failing (>50 is failing)"+countFailedStudents(grade));
-		case 5:
-			System.out.println("5. Look up student grade with user input."+lookupStudentGrade(students, grade, studentToLookup));
-		case 6:
-		     System.out.println("6.Exit");
-		default:
-			System.out.println("Invalid input");
-		}
-        
+        System.out.println("1. Calculate Average: "+calculateAverage(grade));
+        break;
+        case 2:
+        System.out.println("2. Display the student with the highest grade: "+findHighestGradeStudent(students, grade));
+        break;
+        case 3:
+        System.out.println("3. Display the student with the lowest grade: "+findLowestGradeStudent(students, grade));
+        break;
+        case 4:
+        System.out.println("4. Display the count of students who are failing (>50 is failing): "+countFailedStudents(grade));
+        break;
+        case 5:
+        System.out.println("5. Look up student grade with user input: "+ lookupStudentGrade(students, grade, "Vasil"));
+        break;
+        case 6:
+        System.out.println("6.Exit.");
+        break;
     }
 
-    private static double calculateAverage(int[] grade) {
-       int sum = 0;
-        for (int i = 0; i < grade.length; i++){
-            sum += grade[i];
+}
+
+private static double calculateAverage(int[] grade) {
+    int sum = 0;
+    for (int i = 0; i < grade.length; i++){
+        sum += grade[i];
+    }
+    return sum / grade.length;
+}
+
+private static String findHighestGradeStudent(String[] studentNames, int[] grade) {
+    int HighestGrade = grade[0];
+    int index=0;
+    for (int i = 0; i < grade.length; i++){
+        if(grade[i] > HighestGrade){
+            HighestGrade = grade[i];
+            index = i;
         }
-        return sum / grade.length;
     }
+    return studentNames[index];
+}
 
-    private static String findHighestGradeStudent(String[] studentNames, int[] grade) {
-        int HighestGrade = grade[0];
-        String BestStudent;
-        for (int i = 0; i < grade.length; i++){
-            if(grade[i] > HighestGrade){
-                HighestGrade = grade[i];
-                BestStudent = student[i];
-            }
+private static String findLowestGradeStudent(String[] studentNames, int[] grade) {
+    int LowestGrade = grade[0];
+    int index=0;
+    for (int i = 0; i < grade.length; i++){
+        if(grade[i] < LowestGrade){
+            LowestGrade = grade[i];
+            index = i;
         }
-        return BestStudent;
-      
     }
+    return studentNames[index];
+}
 
-    private static String findLowestGradeStudent(String[] studentNames, int[] grade) {
-        int LowestGrade = 0;
-        String WorstStudent;
-        for (int i = 0; i < grade.length; i++){
-            if(grade[i] < LowestGrade){
-                LowestGrade = grade[i];
-                WorstStudent = student[i];
-            }
+private static int countFailedStudents(int[] grade) {
+    int count=0;
+    for(int i=0;i<grade.length;i++){
+        if(grade[i]<50){
+            count++;
         }
-        return WorstStudent;
-      
     }
+    return count;
+}
 
-    private static int countFailedStudents(int[] grade) {
-        count=0;
-        for(int i=0;i<grade.length;i++){
-            if(grade[i]<50){
-                count++;
-            }
+private static int lookupStudentGrade(String[] studentNames, int[] grade, String studentToLookup) {
+   int index = 0;
+    for(int i =0;i<grade.length;i++){
+        if(studentNames[i].equals(studentToLookup)){
+            index=i;
         }
-      return count;
     }
-
-    private static int lookupStudentGrade(String[] studentNames, int[] grade, String studentToLookup) {
-       for(int i =0;i<grades.length;i++){
-           if(studentNames[i].equals(studentToLookup)){
-             index=i;
-           }
-           
-       }
-       return grade[index];
-    }
+    return grade[index];
+}
 }
