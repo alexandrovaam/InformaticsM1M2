@@ -1,0 +1,31 @@
+import java.util.Scanner;
+public class Main {
+   public static void main(String[] args) {
+       Scanner scan = new Scanner(System.in);
+       String[] product = {"Water", "Soda", "Soleti", "Waffle"};
+       double[] price = {0.70, 1.0, 0.60, 1.20};
+       int[] quantity = {10, 10, 10, 10};
+        displayMenu(product,price,quantity);
+        System.out.println("choose a product code");
+       int code = scan.nextInt();
+       buy(code, product,price,quantity);
+        System.out.println();
+        displayMenu(product,price,quantity);
+   }
+   private static void displayMenu(String[] product,double[] price, int[] quantity) {
+       int index = 0;
+       for (int i = 0; i < product.length; i++) {
+           index = i;
+           System.out.println(i+ "/" + product[i] + "/" + price[index] + "/" + quantity[index]);
+       }
+   }
+   private static void buy (int code, String[] product,double[] price, int[] quantity){
+       Scanner read = new Scanner(System.in);
+       System.out.println("you selected: " + product[code]+" priced "+price[code]);
+       System.out.println("Please enter money");
+       double money_in = read.nextDouble();
+       double change = money_in - price[code];
+       System.out.print("Your change is " + change);
+       quantity[code]--;
+     }
+   }
