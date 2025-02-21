@@ -1,0 +1,53 @@
+import java.util.Scanner;
+class BookStore {
+    public static void main(String[] args) {
+        Scanner scan2 = new Scanner(System.in);
+        String[] titles = {"The Belljar", "Harry Potter"};
+        double[] prices = {10.0, 12.0};
+        int[] quantity = {10, 10};
+        displayInfo(titles, prices,  quantity);
+        System.out.println("Do you want to search for a book-- if yes type 1; if no type 2");
+        int yesorno = scan2.nextInt();
+        scan2.nextLine();
+        if(yesorno == 1){
+            searchBook(titles);
+        }
+        System.out.println("Please enter the index of the product you would like to purchase:");
+        int chosen= scan2.nextInt();
+        purchasebooks(chosen, titles,prices,quantity);
+
+    }
+    public static void displayInfo(String[] titles, double[] prices, int[] quantity){
+        int index =0;
+        for(int i=0; i<titles.length; i++){
+            index = i;
+            System.out.println(i+". "+ "title: " + titles[i] +"/price: "+ prices[index] + "/quantity: "+quantity[index]);
+        }
+    }
+    public static void searchBook(String[] titles){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter book title to search:");
+        String userSearch = scan.nextLine().toLowerCase();
+        boolean found = false;
+        for (String title : titles) {
+            if (title.toLowerCase().contains(userSearch)) {
+                System.out.println("Found: " + title);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No match found.");
+        }
+
+    }
+    public static void purchasebooks(int chosen, String[] titles, double[] prices, int[] quantity){
+        Scanner scan1 = new Scanner(System.in);
+        System.out.println("you selected: " + titles[chosen]+" priced "+prices[chosen]);
+        System.out.println("Please enter money");
+        double moneyin = scan1.nextDouble();
+        double change = moneyin - prices[chosen];
+        System.out.println("Your change is " +change);
+        quantity[chosen]--;
+    }
+}
