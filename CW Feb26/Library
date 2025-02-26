@@ -1,0 +1,119 @@
+import java.util.Scanner;
+public class Library {
+    public static void main(String[] args) {
+        Scanner read = new Scanner(System.in);
+        Book[] bookArray = {
+                new Book("The Bell Jar", "Sylvia Plath", 1963, null),
+                new Book("Breakfast at Tiffany's", "Truman Capote", 1958, null)
+        };
+        int choice;
+        do {
+            System.out.println("1. Display Library");
+            System.out.println("2. Borrow a Book");
+            System.out.println("3. Return a Book");
+            System.out.println("4. Exit");
+            choice = read.nextInt();
+            switch(choice){
+                case 1: displayLibrary(bookArray);
+                    break;
+                case 2: borrowBook(bookArray);
+                    break;
+                case 3: returnBook_main(bookArray);
+                    break;
+                /*case 3:
+                    System.out.print("Enter the book title: ");
+                    String title = read.nextLine();
+                    findBookByTitle(bookArray, title);
+                    break;*/
+                case 4: System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again");
+            }
+        }while(choice!=0);
+    }
+    public static void displayLibrary(Book[] books){
+        for(Book item : books){
+            item.getDetails();
+        }
+    }
+    public static void borrowBook(Book[] books){
+        Scanner scan2 = new Scanner(System.in);
+        displayLibrary(books);
+        System.out.println("enter the name of the book you want to BORROW");
+        String bookTitle = scan2.nextLine();
+
+
+        for (Book item: books){
+            if(item.getTitle().equals(bookTitle)){ //check if book exist
+                System.out.println("book is found");
+                if(item.getBorrowerName()== null){ // check if borrower name equals null meaning this book is available
+                    System.out.println("enter your name to borrow this book.");
+                    String newName = scan2.nextLine();
+                    item.borrowBook(item,newName);
+                }
+            }
+        }
+        displayLibrary(books);
+    }
+    public static void returnBook_main(Book[] books){
+        Scanner scan3 = new Scanner(System.in);
+        System.out.println("enter the name of the book you want to RETURN");
+        String bookTitle = scan3.nextLine();
+        for (Book item: books){
+            if(item.getTitle().equals(bookTitle)){ //check if book exist
+                System.out.println("book is found");
+                item.returnBook();
+                System.out.println("You have returned the book successfully.");
+            }
+        }
+        displayLibrary(books);
+    }
+    public static void findBookByTitle(Book[] books, String title){
+        for (int i = 0 ;i< books.length; i++){
+            if(books[i].getTitle().equalsIgnoreCase(title)){
+                System.out.println("book is found"+ i);
+                books[i].getDetails();
+                return;
+            }
+        }
+    }
+}
+class Book{
+    private String title;
+    private String author;
+    private int yearPublished;
+    private String borrowerName;
+
+
+    public Book(String title, String author, int yearPublished, String borrowerName){
+        this.title=title;
+        this.author=author;
+        this.yearPublished=yearPublished;
+        this.borrowerName=null;
+    }
+    public void getDetails(){
+        System.out.println("title: "+title+"/author: "+author+"/year published: "+yearPublished+"/borrower name: "+borrowerName);
+    }
+    public void updateBookInfo(String newTitle, String newAuthor, int newYearPublished){
+        this.title = newTitle;
+        this.author = newAuthor;
+        this.yearPublished = newYearPublished;
+        System.out.println("Book information updated.");
+    }
+    public void borrowBook(Book book, String borrowerName){
+        setBorrowerName(borrowerName);
+    }
+    public void returnBook(){
+        borrowerName=null;
+    }
+    public String getBorrowerName(){
+        return borrowerName;
+    }
+    public void setBorrowerName(String borrowerName){
+        this.borrowerName = borrowerName;
+    }
+    public String getTitle(){
+        return title;
+    }
+}
