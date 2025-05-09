@@ -1,0 +1,43 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+import java.util.Scanner;
+
+public class MathAssessment {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
+
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine().trim();
+        String fileName = name + "-answers.txt";
+
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            System.out.println("Answer the following 5 math questions:");
+
+            for (int i = 1; i <= 5; i++) {
+                int num1 = rand.nextInt(100); // 0 to 99
+                int num2 = rand.nextInt(100);
+                int correctAnswer = num1 + num2;
+
+                System.out.print("Question " + i + ": What is " + num1 + " + " + num2 + "? ");
+                int userAnswer = scanner.nextInt();
+
+                boolean isCorrect = (userAnswer == correctAnswer);
+
+                writer.write("Q" + i + ": " + num1 + " + " + num2 + " = " + userAnswer
+                             + " | Correct answer: " + correctAnswer
+                             + " | " + (isCorrect ? "Correct" : "Incorrect") 
+                             + System.lineSeparator());
+            }
+
+            System.out.println("Assessment completed. Answers saved to " + fileName);
+
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+
+        scanner.close();
+    }
+}
