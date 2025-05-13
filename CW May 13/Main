@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        writeStud("studentRec.txt");
+        readStud("studentRec.txt");
+    }
+
+    public static void writeStud(String path) {
+        try (DataOutputStream outStream = new DataOutputStream(new FileOutputStream(path))) {
+            for (int i = 0; i < 5; i++) {
+                outStream.writeInt(((int) (Math.random() * 100 + Math.random() * 10)));
+                outStream.writeUTF("Name" + i);
+                outStream.writeInt((int) (Math.random() * 10));
+                outStream.writeDouble(3 + (Math.random() + Math.random() * 0.1));
+
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void readStud(String path) {
+        try (DataInputStream inputStream = new DataInputStream(new FileInputStream(path))) {
+            try {
+                while (true) {
+                    System.out.print(inputStream.readInt() + " ");
+                    System.out.print(inputStream.readUTF() + " ");
+                    System.out.print(inputStream.readInt() + " ");
+                    System.out.println(inputStream.readDouble() + " ");
+                }
+            } catch (EOFException e) {
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
