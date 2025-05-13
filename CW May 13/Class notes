@@ -27,11 +27,11 @@ public class Main{
                     System.out.print(inputStream.readDouble()+" ");
                 }
             }
+}
     catch (EOFException e){}
         catch(IOException e){
             System.out.println(e.getMessage());
         }
         }
     }
-}
 
